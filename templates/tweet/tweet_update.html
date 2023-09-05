@@ -25,23 +25,20 @@
                         <div class="card-body">
                             <div class="media">
                                 <div class="media-body">
-                                    <h5 class="mt-0">{{ tweet.title }}</h5>
-                                    <h6 class="mt-0">{{ tweet.content }}</h6>
-                                </div>
-                                {% if tweet.author == user %}
-                                <div style="text-align: right">
-                                    <a href="/tweet/delete/{{ tweet.id }}">
-                                        <span class="badge rounded-pill bg-danger">삭제</span>
-                                    </a>
-                                </div>
-                                <div style="text-align: right">
-                                    <a href="/tweet/update/{{ tweet.id }}">
-                                        <span class="badge rounded-pill bg-warning">수정</span>
-                                    </a>
-                                </div>
-                                {% endif %}
-                                <div style="text-align: right">
-                                    <span style="font-size: small">{{ tweet.author.username }}-{{ tweet.created_at }} </span>
+                                    <h5 class="mt-0">수정할 내용을 적어주세요.</h5>
+                                    <form action="/tweet/update/{{ tweet.id }}" method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group mt-2 mb-2">
+                                            <label for="my-title">제목</label>
+                                            <input type="text" class="form-control" id="my-title" name="my-title" value="{{tweet.title}}">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="my-content">내용</label>
+                                            <textarea class="form-control" style="resize: none" name='my-content'
+                                                      id="my-content">{{tweet.content}}</textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" style="float:right;">수정하기</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
